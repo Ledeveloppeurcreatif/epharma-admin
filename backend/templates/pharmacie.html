@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+
+{% block Body %}
+
+<div class="row mt-4">
+    {% for pharmacie in pharmacies %}
+    <div class="col-md-3 mb-4">
+        <div class="card h-10 card-custom">
+            {% if pharmacie.photo %}
+            <img src="{{ pharmacie.photo.url }}" alt="{{ pharmacie.nom }}" class="card-img-top" style="width: 100px; height: 100px; object-fit: cover;">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ pharmacie.nom }}</h5>
+                <p class="card-text">Adresse : {{ pharmacie.adresse }}</p>
+                {% comment %} <p class="card-text">Téléphone : {{ pharmacie.telephone }}</p> {% endcomment %}
+                <p class="card-text">Email : {{ pharmacie.email }}</p>
+                {% comment %} <p class="card-text">Horaires : {{ pharmacie.horaires_ouverture }}</p> {% endcomment %}
+                <p class="card-text">Propriétaire : {{ pharmacie.proprietaire }}</p>
+                <p class="card-text">numero_ordre : {{ pharmacie.numero_ordre }}</p>
+                <p class="card-text">licence_exploitation : {{ pharmacie.licence_exploitation}}</p>
+                <p class="card-text">attestation_professionnelle : {{ pharmacie.attestation_professionnelle}}</p>
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'modifypharmacie' pharmacie.id %}" class="btn btn-success">Modifier</a>
+                    <a href="{% url 'deletepharmacie' pharmacie.id %}" class="btn btn-warning">Supprimer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

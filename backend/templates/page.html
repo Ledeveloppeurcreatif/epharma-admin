@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block Body %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/cerulean/bootstrap.min.css">
+    </head>
+
+                    <h1> Ajouter une catégorie</h1>
+
+    <form action=""  method="post" style="margin: 1%;">
+
+        {% csrf_token %}
+
+        {{form|crispy}}
+
+        <input  class="btn btn-lg btn-primary btn-block" type="submit" value="Enrégistrer">
+
+    </form>
+
+    </html>
+{% endblock %}
+    

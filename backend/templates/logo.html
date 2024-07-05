@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block Body %}
+    <div class="pagetitle">
+      <h1></h1>
+    </div><!-- End Page Title -->
+
+    <section class="section logo-section">
+      <div class="container">
+        <div class="logo-container">
+          <img src="{% static 'assets/img/Logo-Digipharma by K.png' %}" alt="EPHARMA-Logo" class="img-fluid logo-circle">
+        </div>
+      </div>
+    </section>
+
+    <style>
+        .logo-circle {
+            width: 500px; /* Ajustez la taille si nécessaire */
+            height: 500px; /* Assurez-vous que la hauteur et la largeur sont égales pour un cercle parfait */
+            border-radius: 50%;
+            object-fit: cover; /* Assure que l'image couvre la zone sans être étirée */
+            border: 2px solid #fff; /* Optionnel : ajoute une bordure au cercle */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optionnel : ajoute une ombre pour une meilleure visibilité */
+            display: block;
+            margin: 0 auto; /* Centre l'image */
+        }
+    </style>
+{% endblock %}

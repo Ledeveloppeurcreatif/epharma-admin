@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+
+{% block Body %}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Catégories</h1>
+    <div class="row">
+        {% for categorie in categories %}
+        <div class="col-sm-3 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Catégorie : {{ categorie.nom }}</h5>
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'ModifyCategorie' categorie.idCategorie %}" class="btn btn-success">Modifier</a>
+                        <a href="{% url 'deleteCategorie' categorie.idCategorie %}" class="btn btn-warning">Supprimer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

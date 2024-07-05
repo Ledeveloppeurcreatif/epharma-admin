@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+
+{% block Body %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des Commandes</title>
+</head>
+<body>
+    <h1>Liste des Commandes</h1>
+    <ul>
+        {% for commande in commandes %}
+            <li>
+                <a href="{% url 'Dashboard' commande.pk %}">
+                    Commande #{{ commande.id }} - {{ commande.date_commande }} - Quantité: {{ commande.quantite }} - Prix Total: {{ commande.prix_total }}
+                </a>
+            </li>
+        {% empty %}
+            <li>Aucune commande trouvée.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+{% endblock %}
