@@ -1,0 +1,129 @@
+Received: from PR1P264MB1597.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:193::17)
+ by PR1P264MB1742.FRAP264.PROD.OUTLOOK.COM with HTTPS; Mon, 15 Jan 2024
+ 06:05:45 +0000
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=ipnetinstitute.com;
+Received: from MR1P264MB4163.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:25::12)
+ by PR1P264MB1597.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:193::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7181.23; Mon, 15 Jan
+ 2024 06:05:44 +0000
+Received: from MR1P264MB4163.FRAP264.PROD.OUTLOOK.COM
+ ([fe80::b805:ed2d:264:6d07]) by MR1P264MB4163.FRAP264.PROD.OUTLOOK.COM
+ ([fe80::b805:ed2d:264:6d07%3]) with mapi id 15.20.7181.026; Mon, 15 Jan 2024
+ 06:05:44 +0000
+Date: Mon, 15 Jan 2024 06:05:41 +0000 (GMT)
+From: sales@ipnetinstitute.com
+To: sales@ipnetinstitute.com, yao.ahiabor@ipnetinstitute.com,
+	Koffi.AHIABOR@ipnetinstitute.com
+Message-ID: <1257028480.1661.1705298741924@smtp.office365.com>
+Subject: iPNet Institute of Technology : Retard de payement
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-Organization-ExpirationStartTime: 15 Jan 2024 06:05:44.6339
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id:
+ fbfeeecd-8d4d-4928-a7d6-08dc159002ce
+X-MS-Exchange-Organization-AuthSource: MR1P264MB4163.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 06
+X-ClientProxiedBy: PH0PR07CA0027.namprd07.prod.outlook.com
+ (2603:10b6:510:5::32) To MR1P264MB4163.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:501:25::12)
+X-MS-Exchange-Organization-MessageDirectionality: Originating
+Return-Path: sales@ipnetinstitute.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic:
+ MR1P264MB4163:EE_|PR1P264MB1597:EE_|PR1P264MB1742:EE_
+X-MS-Office365-Filtering-Correlation-Id: fbfeeecd-8d4d-4928-a7d6-08dc159002ce
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:0;
+X-Forefront-Antispam-Report:
+ CIP:255.255.255.255;CTRY:;LANG:fr;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MR1P264MB4163.FRAP264.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:;DIR:INT;
+X-MS-Exchange-CrossTenant-Network-Message-Id: fbfeeecd-8d4d-4928-a7d6-08dc159002ce
+X-MS-Exchange-CrossTenant-AuthSource: MR1P264MB4163.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2024 06:05:44.7166
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: c3076473-d1e8-4bb0-a6aa-b6a9a2166f45
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: lLiic/iO25WRshOjGaesarmLJxSF5FDi0pa5GnEYjNotAunVoB57XpJBBtkvMDuXtDGr9xyxGvI/3LqKMFuKhSy81TzaOOxLHtd+KpLFpoM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR1P264MB1597
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:01.2561955
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.7181.022
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910001)(944506478)(944626604)(920097)(425001)(930097)(140003);
+X-Microsoft-Antispam-Message-Info:
+	AbvVmcYJrH3Hz/HND3wZ6R1VJYEnFsvokg41kVNV2557vuyW5/fEKXl+kBug7n+YM3R/rA/EPwl2myYNhz40TJevkeilCwD5FG3nwLHElXmeRRhzW60f3xXy9EuLjUNrWVD8iIPl8OWnC4zyAOkOsCxzMGFWI2cmI2tp6Wuo9ilKcjvgIQr7v1a5YmhD3aQ1FlXkudLAkT8nxEfkSvKkUXFXQPtvVe7EVebjA1dZoqWsOS9KRJGtgiL456Sos9i5MtF2rPBdcNG6va7Cqc30TLH7dCtmVv6vLtfNFC79XU+5v0Te3OO1xmH9+sZLidhlxx7hXl+mNqFteY1bRONAstwQVF2iDwJom0KYR4rLk45Re6zVZNml6tMrRuWFEc2kzphYenHdY1MnNkx4zCUJ1Bex29xiNxet7y1346xsq/ZnE5jnLLVEgAli9NHLsM+VxYlSf3XgFIdGzuQ7ahiECiGAeZgd/xq+AVVMwVX46QlGT7iH2WQjgCzVAPrbq7C7Z6rBUzjEZ2JHGbEY8veDXZgerBIVHjHtk2SLe4PwkIC+XGd2vpsdbw4E6rG+f6gHFk7POaWkDybvF7Kpi37YH2mbcTZPuXaxL8QnxBDNaqP8sPaUVse5VK5MiVYOA+uFaNGEFsfc1GIDKOm9HtUo0S5JxAXUAqkvoJ0mVc0c4RVlmAP/ouHG5iv1C9wejsArmurTuFNchskZ/fcYTmlG4w==
+MIME-Version: 1.0
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.=
+w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns=3D"http://www.w3.=
+org/1999/xhtml"><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"><m=
+eta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D1"><=
+title>iPNet Institute of Technology</title><style type=3D"text/css" media=
+=3D"screen">/* Force Hotmail to display emails at full width */ .ExternalCl=
+ass { display: block !important; width: 100%; } /* Force Hotmail to display=
+ normal line spacing */ .ExternalClass, .ExternalClass p, .ExternalClass sp=
+an, .ExternalClass font, .ExternalClass td, .ExternalClass div { line-heigh=
+t: 100%; } body, p, h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; } body,=
+ p, td { font-family: Arial, Helvetica, sans-serif; font-size: 15px; color:=
+ #333333; line-height: 1.5em; } h1 { font-size: 24px; font-weight: normal; =
+line-height: 24px; } body, p { margin-bottom: 0; -webkit-text-size-adjust: =
+none; -ms-text-size-adjust: none; } img { line-height: 100%; outline: none;=
+ text-decoration: none; -ms-interpolation-mode: bicubic; } a img { border: =
+none; } .background { background-color: #333333; } table.background { margi=
+n: 0; padding: 0; width: 100% !important; } .block-img { display: block; li=
+ne-height: 0; } a { color: white; text-decoration: none; } a, a:link { colo=
+r: #2A5DB0; text-decoration: underline; } table td { border-collapse: colla=
+pse; } td { vertical-align: top; text-align: left; } .wrap { width: 600px; =
+} .wrap-cell { padding-top: 30px; padding-bottom: 30px; } .header-cell, .bo=
+dy-cell, .footer-cell { padding-left: 20px; padding-right: 20px; } .header-=
+cell { background-color: #eeeeee; font-size: 24px; color: #ffffff; } .body-=
+cell { background-color: #ffffff; padding-top: 30px; padding-bottom: 34px; =
+} .footer-cell { background-color: #eeeeee; text-align: left; font-size: 13=
+px; padding-top: 30px; padding-bottom: 30px; } .card { width: 400px; margin=
+: 0 auto; } .data-heading { text-align: right; padding: 10px; background-co=
+lor: #ffffff; font-weight: bold; } .data-value { text-align: left; padding:=
+ 10px; background-color: #ffffff; } .force-full-width { width: 100% !import=
+ant; }</style><style type=3D"text/css" media=3D"only screen and (max-width:=
+ 600px)">@media only screen and (max-width: 600px) { body[class*=3D"backgro=
+und"], table[class*=3D"background"], td[class*=3D"background"] { background=
+: #eeeeee !important; } table[class=3D"card"] { width: auto !important; } t=
+d[class=3D"data-heading"], td[class=3D"data-value"] { display: block !impor=
+tant; } td[class=3D"data-heading"] { text-align: left !important; padding: =
+10px 10px 0; } table[class=3D"wrap"] { width: 100% !important; } td[class=
+=3D"wrap-cell"] { padding-top: 0 !important; padding-bottom: 0 !important; =
+} }</style></head><body bgcolor=3D"#eeeeee"><center><table cellpadding=3D"0=
+" cellspacing=3D"0" class=3D"force-full-width"><tr><td height=3D"60" valign=
+=3D"top" class=3D"header-cell"><img width=3D"196" height=3D"60" src=3D"http=
+s://www.ipnetuniversity.com/assets/images/logo.png" alt=3D"logo"></td></tr>=
+<tr><td valign=3D"top" class=3D"body-cell"><table cellpadding=3D"0" cellspa=
+cing=3D"0" width=3D"100%" bgcolor=3D"#ffffff"><tr><td valign=3D"top" style=
+=3D"padding-bottom:20px; background-color:#ffffff;"><div class=3D"row">    =
+                                             		<div class=3D"col-xs-12">   =
+                                                     			<i class=3D"fa fa-t=
+humbs-up fa-5x text-green-300"> Bonjour, vous avez un retard de payement. V=
+euillez passer regler la somme due le plus tot possible.  </i> <br>			<div =
+class=3D"invoice-title">                                                			=
+	<h3>Etudiant: Koffi Emmanuel AHIABOR</h3><div>				<h3><font size=3D"3" col=
+or=3D"red">Montant total du: 270 000 CFA</font></h3>			<br><hr><br>        =
+                                                                 <h5 class=
+=3D"pull-right">Annee:     2023-2024</h5>  <h5 class=3D"pull-right">Type de=
+ frais:      Ecolage  - Resident - 2eme ann=C3=A9e Tranche 2</h5>	 <h5 clas=
+s=3D"pull-right">Total du frais:     270 000 CFA</h5>	 <h5 class=3D"pull-ri=
+ght">Montant Paye:       0 CFA</h5>	 <h5 class=3D"pull-right">Montant Du:  =
+       270 000 CFA</h5>	 <h5 class=3D"pull-right"><font color=3D"red">Date =
+Echeance:      31-01-2024</font></h5>	 <hr>   <br>		</div>                 =
+                                                          	</div>          =
+                                                                     </td><=
+/tr><tr><td style=3D"padding-top:20px;background-color:#ffffff;">Merci et b=
+onne journee!<br><br>L'administration</td></tr></table></td></tr><tr><td va=
+lign=3D"top" class=3D"footer-cell"> 	iPNet Institute of Technology<br>TOUR =
+IPNET, Agbalepedo, 05 BP 507 Lome - Togo<br>Tel: +228 22 51 77 77 / 22 51 8=
+1 81<br>Mob: 96475039</td></tr></table></center></body></html>

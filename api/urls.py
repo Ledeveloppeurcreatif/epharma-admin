@@ -7,8 +7,9 @@ router = routers.DefaultRouter()
 router.register('Produits', ProduitsViewSet)
 router.register('Catégorie', CatégorieViewSet)
 router.register('Pharmacie', PharmacieViewSet)
+router.register(r'users', UserViewSet, basename='user')
 router.register('Commande', CommandeViewSet)
-router.register('User', UserViewSet ,basename='user')
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

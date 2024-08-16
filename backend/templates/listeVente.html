@@ -1,0 +1,53 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block Body %}
+<head>
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/cerulean/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Liste des Ventes</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                    <th>Client</th>
+                    <th>Date</th>
+                    <th>Actions</th> <!-- Nouvelle colonne pour les actions -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for vente in ventes %}
+                    <tr>
+                        {% if vente.produit.image %}
+                            <td>
+                                <img src="{{ vente.produit.image.url }}" alt="{{ vente.produit.Medicament }}" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
+                            </td>
+                        {% else %}
+                            <td>Aucune image</td>
+                        {% endif %}
+                        <td>{{ vente.produit.Medicament }}</td>
+                        <td>{{ vente.quantite }}</td>
+                        <td>{{ vente.client }}</td>
+                        <td>{{ vente.date_commande|date:"d/m/Y H:i:s" }}</td>
+                        <td>
+                            <!-- Vérification si une facture existe pour cette vente -->
+                            {% if vente.facture %}
+                                <a href="{% url 'voir_facture' vente.facture.id %}" class="btn btn-outline-primary">Voir la facture</a>
+                            {% else %}
+                                <span class="text-muted">Pas de facture</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">Aucune vente trouvée.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+{% endblock %}

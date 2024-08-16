@@ -14,23 +14,34 @@ class CatégorieSerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
         
 
+class PharmacieSerializer(serializers.ModelSerializer):
+   
+    user = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        default=1  
+    )
 
-class PharmacieSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Pharmacie
         fields = '__all__'
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email']
 
-class CommandeSerializer(serializers.HyperlinkedModelSerializer):
+
+
+class CommandeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Commande
         fields = '__all__'
-
-
-class UserSerializer(serializers.ModelSerializer):
-    url = serializers.HyperlinkedIdentityField(view_name='user-detail', source='pharmacie',)
-
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'first_name', 'last_name', 'url')
+        extra_kwargs = {
+            'produit': {'required': True},
+        }
+    def create(self, validated_data):
+        # Journaliser les données validées
+        print("Données validées :", validated_data)
+        
+        return super().create(validated_data)

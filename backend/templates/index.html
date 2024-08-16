@@ -11,8 +11,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{% static 'assets/img/Logo-Digipharma by K.png' %}" rel="icon">
-  <link href="{% static 'assets/img/Logo-Digipharma by K.png' %}" rel="apple-touch-icon">
+  <link href="{% static 'assets/img/LOGO_JPOPE_DIGI-PHARMA_AHIABOR Koffi Emmanuel.jpg' %}" rel="icon">
+  <link href="{% static 'assets/img/LOGO_JPOPE_DIGI-PHARMA_AHIABOR Koffi Emmanuel.jpg' %}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -45,7 +45,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="" class="logo d-flex align-items-center">
         <img src="{% static 'assets/img/Logo-Digipharma by K.png' %}" alt="">
         <span class="d-none d-lg-block">EPHARMA</span>
       </a>
@@ -138,14 +138,14 @@
 
           </ul><!-- End Notification Dropdown Items --> {% endcomment %}
 
-        </li><!-- End Notification Nav -->
+        {% comment %} </li><!-- End Notification Nav -->
 
         <li class="nav-item dropdown">
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-chat-left-text"></i>
             <span class="badge bg-success badge-number"></span>
-          </a><!-- End Messages Icon -->
+          </a><!-- End Messages Icon --> {% endcomment %}
 
           {% comment %} <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
             <li class="dropdown-header">
@@ -197,7 +197,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="" data-bs-toggle="dropdown">
-            <img src="{% if pharmacie.photo %}{{ pharmacie.photo.url }}{% else %}{% static 'assets/img/Logo-Digipharma by K.png' %}{% endif %}" alt="" class="rounded-circle">
+            <img src="{% if pharmacie.photo %}{{ pharmacie.photo.url }}{% else %}{% static 'assets/img/LOGO_JPOPE_DIGI-PHARMA_AHIABOR Koffi Emmanuel.jpg' %}{% endif %}" alt="" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{ user.username }}</span>
           </a><!-- End Profile Image Icon -->
 
@@ -209,7 +209,7 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
+{% comment %} 
             <li>
               <a class="dropdown-item d-flex align-items-center" href="">
                 <i class="bi bi-person"></i>
@@ -238,7 +238,7 @@
             </li>
             <li>
               <hr class="dropdown-divider">
-            </li>
+            </li> {% endcomment %}
 
             <li>
               <a class="dropdown-item d-flex align-items-center" href="{% url 'sortie' %}">
@@ -257,24 +257,67 @@
 
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
-
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{% url 'Logo' %}">
-          <i class="bi bi-house-door-fill"></i>
-          <span>Home</span>
-        </a>
-      </li><!-- End Contact Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link " href="{% url 'Dashboard' %}">
-          <i class="bi bi-grid"></i>
+        {% comment %} {% if perms.Dashboard %} {% endcomment %}
+        <a class="nav-link collapsed" href="{% url 'Dashboard' %}">
+          <i class="bi bi-bar-chart-fill"></i>      
           <span>Dashboard</span>
+          {% comment %} {% endif %} {% endcomment %}
         </a>
+      </li>
+    <!-- End Contact Page Nav -->
 
-  
+        <ul class="sidebar-nav" id="sidebar-nav">
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url 'Logo' %}">
+              <i class="bi bi-house-door-fill"></i>
+              <span>Home</span>
+            </a>
+          </li>
+
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'Commandes' %}">
+            <i class="bi bi-cart-fill"></i>
+            <span>Commande</span>
+          </a>
+        </li>
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url 'HistoriqueCommande' %}">
+              <i class="bi bi-archive-fill"></i>
+              <span>Historique</span>
+            </a>
+          </li>
+        
+        <ul class="sidebar-nav" id="sidebar-nav">
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url 'Creer_vente' %}">
+              <i class="bi bi-receipt"></i>
+              <span>Créer une vente</span>
+            </a>
+          </li>
+      
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url 'liste_ventes' %}">
+              <i class="bi bi-card-checklist"></i>
+              <span>Liste des ventes</span>
+            </a>
+          </li>
+
+      
 
       <li class="nav-heading">Pages</li>
+
+      <li class="nav-item">
+        {% if perms.ajouter_pharmacie %}
+        <a class="nav-link collapsed" href="{% url 'demande' %}">
+          <i class="bi bi-file-earmark-medical"></i>
+          <span>Demande d'inscription</span>
+        </a>
+        {% endif %}
 
       <li class="nav-item">
         {% if perms.ajouter_pharmacie %}
@@ -368,14 +411,14 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright 2024 <strong><span>EPHARMA</span></strong>. All Rights Reserved
+      &copy; Copyright 2024 <strong><span>EPHARMA</span></strong>. <!--All Rights Reserved-->
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">Bignuel_code</a>
+      {% comment %} Designed by <a href="https://bootstrapmade.com/">Bignuel_code</a> {% endcomment %}
     </div>
   </footer><!-- End Footer -->
 
@@ -395,5 +438,6 @@
   <script src="{% static 'assets/js/main.js' %}"></script>
 
 </body>
+
 
 </html>

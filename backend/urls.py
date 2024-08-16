@@ -3,6 +3,7 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 urlpatterns = [
      path('page/', views.saveCatégorie, name='saveCatégorie'),
      path('view/', views.view, name='view'),
@@ -18,15 +19,30 @@ urlpatterns = [
      path('modifier/<int:id>/', views.ModifyCategorie, name='ModifyCategorie'),
      path('deleteCategorie/<int:id>/', views.deleteCategorie, name='deleteCategorie'),
      path('Logo/', views.Logo, name='Logo'),
+     path('', views.Accueil, name='Accueil'),
      path('Dashboard/', views.Dashboard, name='Dashboard'),
-     # path('profile/', views.profile, name='profile'),
+     path('Commandes/', views.Commandes, name='Commandes'),
+     path('HistoriqueCommande/', views.HistoriqueCommande, name='HistoriqueCommande'),
+     path('accepter_commande/<int:pk>/', views.accepter_commande, name='accepter_commande'),
+     path('refuser_commande/<int:pk>/', views.refuser_commande, name='refuser_commande'),
+     path('Creer_vente/', views.Creer_vente, name='Creer_vente'),
+     path('liste_ventes/', views.liste_ventes, name='liste_ventes'),
+     path('demande/', views.demande, name='demande'),
+     path('Message/', views.Message, name='Message'),
+     path('voir_facture/<int:id>/', views.voir_facture, name='voir_facture'),
+     
+
+
+    
+
+     
 
 
 
      #urls authentification
     #path('', views.dashboard, name='dashboard'),
-    path('', views.connexion, name='connexion'),
-    path('inscription', views.inscription, name='inscription'),
+    path('connexion', views.connexion, name='connexion'),
+    path('Inscription', views.Inscription, name='Inscription'),
     path('sortie', views.sortie, name='sortie'),
     path('password_oublier', views.password_oublier, name='password_oublier'),
     path('modifier_password', views.modifier_password, name='modifier_password'),

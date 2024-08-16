@@ -16,9 +16,9 @@
                 <p class="card-text">Email : {{ pharmacie.email }}</p>
                 {% comment %} <p class="card-text">Horaires : {{ pharmacie.horaires_ouverture }}</p> {% endcomment %}
                 <p class="card-text">Propriétaire : {{ pharmacie.proprietaire }}</p>
-                <p class="card-text">numero_ordre : {{ pharmacie.numero_ordre }}</p>
+                {% comment %} <p class="card-text">numero_ordre : {{ pharmacie.numero_ordre }}</p>
                 <p class="card-text">licence_exploitation : {{ pharmacie.licence_exploitation}}</p>
-                <p class="card-text">attestation_professionnelle : {{ pharmacie.attestation_professionnelle}}</p>
+                <p class="card-text">attestation_professionnelle : {{ pharmacie.attestation_professionnelle}}</p> {% endcomment %}
                 <div class="d-flex justify-content-between">
                     <a href="{% url 'modifypharmacie' pharmacie.id %}" class="btn btn-success">Modifier</a>
                     <a href="{% url 'deletepharmacie' pharmacie.id %}" class="btn btn-warning">Supprimer</a>

@@ -21,6 +21,23 @@ class Pharmacie(models.Model):
 
     def __str__(self):
         return self.nom
+    
+
+
+
+
+class inscription(models.Model):
+    id = models.AutoField(primary_key=True)
+    photo = models.ImageField(upload_to='pharmacies/photos/', blank=True, null=True)
+    nom = models.CharField(blank=True, null=True)
+    adresse = models.CharField(max_length=255,blank=True, null=True)  
+    email = models.EmailField(blank=True, null=True)
+    proprietaire = models.CharField(max_length=255,blank=True, null=True)
+    numero_ordre = models.CharField(max_length=100,blank=True, null=True)
+    licence_exploitation = models.FileField(upload_to='pharmacie/autorisation/', blank=True, null=True)
+    attestation_professionnelle = models.FileField(upload_to='pharmacie/attestation/', blank=True, null=True)
+    
+    
 
 class Catégorie(models.Model):
     idCategorie = models.AutoField(primary_key=True)
@@ -44,19 +61,50 @@ class Produits(models.Model):
 
 
 class Commande(models.Model):
+    STATUS_CHOICES = [
+        ('Pending', 'Pending'),
+        ('Accepted', 'Accepted'),
+        ('Rejected', 'Rejected'),
+    ]
     id= models.AutoField(primary_key=True)
     date_commande = models.DateTimeField(default=timezone.now)
-    prix_total = models.DecimalField(max_digits=8, decimal_places=2)
     quantite = models.PositiveIntegerField()
+    username = models.CharField(max_length=255, default='default_username')
+    useremail = models.EmailField(max_length=255,default='default@example.com') 
     produit = models.ForeignKey(Produits, on_delete=models.CASCADE)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending') 
 
 
     def __str__(self):
         return self.id
+    
+
+class Historique(models.Model):
+     date_commande = models.DateTimeField(default=timezone.now)
+     quantite = models.IntegerField()
+     username =  models.CharField(max_length=255, default='default_username')
+     useremail = models.EmailField(max_length=255,default='default@example.com') 
+     produit = models.ForeignKey(Produits, on_delete=models.CASCADE)
+     status = models.CharField(max_length=10, choices=Commande.STATUS_CHOICES)
 
 
 
+class Vente(models.Model):
+    id = models.AutoField(primary_key=True)
+    produit = models.ForeignKey(Produits, on_delete=models.CASCADE,default=1)
+    quantite = models.IntegerField()
+    client = models.CharField(max_length=255)
+    date_commande = models.DateTimeField(default=timezone.now)
 
+
+
+class Facture(models.Model):
+    vente = models.OneToOneField(Vente, on_delete=models.CASCADE)
+    date_facture = models.DateTimeField(default=timezone.now)
+    montant_total = models.DecimalField(max_digits=10, decimal_places=2)
+    
+    def __str__(self):
+        return f'Facture {self.id} pour Vente {self.vente.id}'
 
 
 
@@ -126,9 +174,6 @@ class Commande(models.Model):
 #     coordonnees = models.CharField(max_length=255)
 #     pharmacie = models.ForeignKey(Pharmacie, on_delete=models.CASCADE)
 
-# class Panier(models.Model):
-#     idPanier = models.AutoField(primary_key=True)
-#     Medicaments_ajouter = models.ManyToManyField(Produits)
 
 
    

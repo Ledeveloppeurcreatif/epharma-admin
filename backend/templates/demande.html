@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+
+{% block Body %}
+
+<div class="row mt-4">
+    {% for pharmacie in pharmacies %}
+    <div class="col-md-3 mb-4">
+        <div class="card h-10 card-custom">
+            {% if pharmacie.photo %}
+            <img src="{{ pharmacie.photo.url }}" alt="{{ pharmacie.nom }}" class="card-img-top" style="width: 230px; height: 230px; object-fit: cover;">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ pharmacie.nom }}</h5>
+                <p class="card-text">Adresse : {{ pharmacie.adresse }}</p>
+                <p class="card-text">Email : {{ pharmacie.email }}</p>
+                <p class="card-text">Propriétaire : {{ pharmacie.proprietaire }}</p>
+                <p class="card-text">numero_ordre : {{ pharmacie.numero_ordre }}</p>
+                
+                <!-- Affichage des fichiers PDF -->
+                {% if pharmacie.licence_exploitation %}
+                <p class="card-text">
+                    <a href="{{ pharmacie.licence_exploitation.url }}" target="_blank">Licence d'exploitation</a>
+                </p>
+                {% endif %}
+                {% if pharmacie.attestation_professionnelle %}
+                <p class="card-text">
+                    <a href="{{ pharmacie.attestation_professionnelle.url }}" target="_blank">Attestation professionnelle</a>
+                </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

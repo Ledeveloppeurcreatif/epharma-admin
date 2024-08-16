@@ -1,0 +1,131 @@
+{% extends 'index.html' %}
+
+{% block Body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Commandes</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/cerulean/bootstrap.min.css">
+    <style>
+        .table td, .table th {
+            vertical-align: middle;
+        }
+        .rounded-circle {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+        }
+        .btn-accepter {
+            background-color: #28a745;
+            color: white;
+            margin-right: 5px;
+        }
+        .btn-accepter:hover {
+            background-color: #218838;
+        }
+        .btn-refuser {
+            background-color: #dc3545;
+            color: white;
+        }
+        .btn-refuser:hover {
+            background-color: #c82333;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Mes Commandes</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Image</th>
+                        <th>Produit</th>
+                        <th>Quantité</th>
+                        <th>Prix</th>
+                        {% comment %} <th>Client</th> {% endcomment %}
+                        <th>Client</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for commande in commandes %}
+                    <tr>
+                        <td><img src="{{ commande.produit.image.url }}" alt="{{ commande.produit.Medicament }}" class="rounded-circle"></td>
+                        <td>{{ commande.produit.Medicament }}</td>
+                        <td>{{ commande.quantite }}</td>
+                        <td>{{ commande.produit.prix }} CFA</td>
+                        {% comment %} <td>{{ commande.username }}</td> {% endcomment %}
+                        <td>{{ commande.useremail }}</td>
+                        <td>{{ commande.date_commande|date:"d/m/Y H:i:s" }}</td>
+                        <td class="action-buttons">
+                            <button class="btn btn-accepter" onclick="accepterCommande({{ commande.id }})">Accepter</button>
+                            <button class="btn btn-refuser" onclick="refuserCommande({{ commande.id }})">Refuser</button>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8" class="text-center">Aucune commande trouvée.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function accepterCommande(id) {
+            fetch(`/accepter_commande/${id}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status) {
+                    alert(data.status);
+                    location.reload();
+                } else {
+                    alert('Erreur: ' + data.error);
+                }
+            });
+        }
+
+        function refuserCommande(id) {
+            fetch(`/refuser_commande/${id}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status) {
+                    alert(data.status);
+                    location.reload();
+                } else {
+                    alert('Erreur: ' + data.error);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+{% endblock %}

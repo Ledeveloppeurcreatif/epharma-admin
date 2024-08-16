@@ -1,0 +1,148 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block Body %}
+<head>
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/cerulean/bootstrap.min.css">
+    <style>
+        /* Styles pour l'impression */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: "Times New Roman", Times, serif;
+                background-color: white; /* Assure que le fond est blanc lors de l'impression */
+            }
+            .container {
+                width: 100%;
+                margin: 0;
+                padding: 20px;
+                background-color: white; /* Couleur du papier en blanc */
+            }
+            .header img {
+                max-width: 100px; /* Réduit la taille du logo pour l'impression */
+                margin-right: 20px; /* Espace entre le logo et le nom de l'entreprise */
+            }
+            .no-print {
+                display: none;
+            }
+        }
+
+        /* Marges pour l'affichage sur écran */
+        body {
+            font-family: "Arial", sans-serif;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .header img {
+            max-width: 50px; /* Taille du logo pour l'affichage à l'écran */
+            margin-right: 20px; /* Espace entre le logo et le nom de l'entreprise */
+        }
+        .header h2 {
+            margin: 0; /* Supprime les marges pour centrer le texte verticalement */
+            line-height: 50px; /* Aligne le texte avec la hauteur du logo */
+        }
+        .info-section {
+            margin-top: 20px;
+        }
+        .info-section h5 {
+            margin-bottom: 5px;
+        }
+        .text-end {
+            text-align: right;
+        }
+        .table {
+            margin-top: 20px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+        .mt-4 {
+            margin-top: 1rem;
+        }
+        .mt-5 {
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- En-tête de la facture -->
+        <div class="header">
+            <img src="{% static 'assets/img/LOGO_JPOPE_DIGI-PHARMA_AHIABOR Koffi Emmanuel.jpg' %}" alt="Logo">
+            <h2>EPHARMA</h2>
+        </div>
+
+        <hr>
+
+        <!-- Informations sur la facture -->
+        <div class="info-section">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Client</h5>
+                    <p>{{ facture.vente.client }}</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p><strong>Date de la facture:</strong> {{ facture.date_facture|date:"d/m/Y H:i:s" }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Détails de la commande -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Produit</th>
+                            <th>Quantité</th>
+                            <th>Prix Unitaire</th>
+                            <th>Sous-total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ facture.vente.produit.Medicament }}</td>
+                            <td>{{ facture.vente.quantite }}</td>
+                            <td>{{ facture.vente.produit.prix }} CFA</td>
+                            <td>{{ facture.vente.quantite|floatformat:2 }} × {{ facture.vente.produit.prix|floatformat:2 }} CFA</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="3" class="text-end">Montant Total</th>
+                            <th>{{ facture.montant_total|floatformat:2 }} CFA</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <!-- Footer de la facture -->
+        <div class="footer mt-5">
+            <p>Merci pour votre achat !</p>
+            <p>Pour toute question, contactez-nous à <strong>epharma@gmaill.com</strong> ou au <strong>(228) 92596583</strong>.</p>
+        </div>
+
+        <!-- Bouton pour imprimer la facture -->
+        <div class="text-center no-print mt-4">
+            <button onclick="window.print()" class="btn btn-primary">Imprimer la facture</button>
+        </div>
+    </div>
+</body>
+{% endblock %}

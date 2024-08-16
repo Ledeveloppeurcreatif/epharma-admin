@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from backend.models import Catégorie,Produits,Pharmacie,Commande
 from .forms import *
 from django.core.mail import EmailMessage
@@ -9,7 +9,10 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.core.validators import validate_email
 from django.utils import timezone
+from api.views import*
 
+def  Accueil(request):
+    return render (request,'accueil.html')
 
 
 @login_required
@@ -18,27 +21,72 @@ def  Logo(request):
     # pharmacie = Pharmacie.objects.filter(user=pharmacie_account)[0]
     return render (request,'logo.html')
 
+@login_required
+def Dashboard(request):
+    return render (request,'dashboard.html')
 
 @login_required
-def  Dashboard(request):
- commandes = Commande.objects.all()
- return render (request,'dashboard.html',{'commandes': commandes})
+def Commandes(request):
+    commandes = Commande.objects.all()
+    context = {
+        'commandes': commandes
+    }
+    return render(request, 'commande.html', context)
+
+@login_required
+def  HistoriqueCommande(request):
+    historiques = Historique.objects.all()
+    return render(request, 'historique.html', {'historiques': historiques})
 
 
+@login_required  
+def modifyProduit(request,id):
+     #récuperation des données de la base de donnée
+    product = Produits.objects.get(idProduit=id)
+  
+   
+    if request.method =='POST': 
+        form = ProduitsForm(request.POST, instance=product)
+        if form.is_valid():
+            product =  form.save()
+        return redirect('liste_produits')
+    else :
+        print("let's modify")
+        form = ProduitsForm(instance=product)
+        print(form)
+    return render (request, 'formulaire_produit.html',{'form':form, 'produits': product}) 
+
+@login_required
+def Creer_vente(request):
+    if request.method == 'POST':
+        form = VenteForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            vente = form.save()
+
+            # Calcul du montant total 
+            montant_total = vente.produit.prix * vente.quantite 
+
+            # Création de la facture
+            facture = Facture.objects.create(vente=vente, montant_total=montant_total)
+
+            return redirect('liste_ventes')
+    else:
+        form = VenteForm()
+
+    return render(request, 'vente.html', {'form': form})
+
+@login_required
+def liste_ventes(request):
+    vente = Vente.objects.all()
+    return render(request, 'listeVente.html', {'ventes': vente})
 
 
-# def profile(request, id):
-#      if id:
-#          user = get_object_or_404(Pharmacie, id=id)
-#      else:
-#       user = request.user
-#      context = {
-#          'name': id.name,
-#          'adresse': id.adresse,
-#          'telephone': id.telephone,
-#          'email': id.email,
-#     }
-#      return render(request, 'profile.html', context)
+def voir_facture(request, id):
+    facture = get_object_or_404(Facture, id=id)
+    return render(request, 'facture.html', {'facture': facture})
+
+
 
 @login_required
 def saveCatégorie(request):
@@ -54,7 +102,7 @@ def saveCatégorie(request):
 
     return render (request, 'page.html',{'form':form}) 
 
-
+@login_required
 def view(request):
     categories = Catégorie.objects.all()
     return render(request, 'view.html', {'categories': categories})
@@ -102,6 +150,9 @@ def ajouter_produit(request):
     return render (request, 'formulaire_produit.html',{'form':form}) 
 
 
+
+
+@login_required
 def liste_produits(request):
     produit = Produits.objects.all()
     return render(request, 'affichage.html', {'produits': produit})
@@ -110,26 +161,6 @@ def liste_produits(request):
 
 
 
-@login_required  
-def modifyProduit(request,id):
-     #récuperation des données de la base de donnée
-    product = Produits.objects.get(idProduit=id)
-  
-   
-    if request.method =='POST': 
-        form = ProduitsForm(request.POST, instance=product)
-        if form.is_valid():
-            product =  form.save()
-          
-        
-
-        return redirect('liste_produits')
-    
-    else :
-        print("let's modify")
-        form = ProduitsForm(instance=product)
-        print(form)
-    return render (request, 'formulaire_produit.html',{'form':form, 'produits': product}) 
 
 
 @login_required
@@ -145,19 +176,83 @@ def deleteProduit(request,id):
 @login_required
 @permission_required('ajouter_pharmacie', raise_exception=True)
 def ajouter_pharmacie(request):
-    print("hello")
-    if request.method =='POST':
-        form = PharmacieForm(request.POST,request.FILES)
-        
-        if form.is_valid():
-            img = form.cleaned_data.get("image")
-            form.save()
-            return redirect('liste_pharmacie')
-    
-    else :
-        form = PharmacieForm()
+    error = False
+    message = ""
 
-    return render (request, 'formulaire_Pharmacie.html',{'form':form}) 
+    if request.method == "POST":
+        photo = request.FILES.get('photo')
+        nom = request.POST.get('nom')
+        adresse = request.POST.get('adresse')
+        email = request.POST.get('email')
+        proprietaire = request.POST.get('proprietaire')
+        numero_ordre = request.POST.get('numero_ordre')
+        licence_exploitation = request.FILES.get('licence_exploitation')
+        attestation_professionnelle = request.FILES.get('attestation_professionnelle')
+        password = request.POST.get('password')
+        repassword = request.POST.get('repassword')
+
+        try:
+            validate_email(email)
+        except:
+            error = True
+            message = "Entrez un email valide svp!"
+
+        if not error:
+            if password != repassword:
+                error = True
+                message = "Les deux mots de passe ne correspondent pas!"
+
+        if not error:
+            user = User.objects.filter(email=email).first()
+            if user:
+                error = True
+                message = f"Un utilisateur avec cet email {email} existe déjà!"
+
+        if not error:
+            print(nom)
+            print(password)
+            print(email)
+            user = User.objects.create_user(
+                email=email,
+                password=password,
+                username=nom,
+                last_login=timezone.now()
+            )
+            user.save()
+            print(user.id)
+            pharmacie = Pharmacie.objects.create(
+                nom=nom,
+                adresse=adresse,
+                email=email,
+                password=password,
+                proprietaire=proprietaire,
+                numero_ordre=numero_ordre,
+                photo=photo,
+                licence_exploitation=licence_exploitation,
+                attestation_professionnelle=attestation_professionnelle,
+                user = user
+            )
+            print(pharmacie.photo)
+            pharmacie.save()
+           
+
+            return redirect('liste_pharmacie')
+
+        context = {
+            'error': error,
+            'message': message
+        }
+
+        return render(request, 'formulaire_Pharmacie.html', context)
+
+    return render(request, 'formulaire_Pharmacie.html', {})
+    
+
+
+
+
+
+
 
 @login_required
 @permission_required('liste_pharmacie', raise_exception=True)
@@ -231,7 +326,7 @@ def connexion(request):
 
             if auth_user:
                 login(request, auth_user)
-                return redirect('Logo')
+                return redirect('Dashboard')
             else:
                 print("mot de pass incorrecte")
         else:
@@ -242,10 +337,7 @@ def connexion(request):
 
 
 
-def inscription(request):
-    error = False
-    message = ""
-
+def Inscription(request):
     if request.method == "POST":
         photo = request.FILES.get('photo')
         nom = request.POST.get('nom')
@@ -255,65 +347,47 @@ def inscription(request):
         numero_ordre = request.POST.get('numero_ordre')
         licence_exploitation = request.FILES.get('licence_exploitation')
         attestation_professionnelle = request.FILES.get('attestation_professionnelle')
-        password = request.POST.get('password')
-        repassword = request.POST.get('repassword')
 
-        try:
-            validate_email(email)
-        except:
-            error = True
-            message = "Entrez un email valide svp!"
-
-        if not error:
-            if password != repassword:
-                error = True
-                message = "Les deux mots de passe ne correspondent pas!"
-
-        if not error:
-            user = User.objects.filter(email=email).first()
-            if user:
-                error = True
-                message = f"Un utilisateur avec cet email {email} existe déjà!"
-
-        if not error:
-            print(nom)
-            print(password)
-            print(email)
-            user = User.objects.create_user(
-                email=email,
-                password=password,
-                username=nom,
-                last_login=timezone.now()
-            )
-            user.save()
-            print(user.id)
-            pharmacie = Pharmacie.objects.create(
+        # Vérification que tous les champs sont remplis
+        if all([photo, nom, adresse, email, proprietaire, numero_ordre, licence_exploitation, attestation_professionnelle]):
+            # Création de l'objet Pharmacie
+            pharmacie = inscription.objects.create(
                 nom=nom,
                 adresse=adresse,
                 email=email,
-                password=password,
                 proprietaire=proprietaire,
                 numero_ordre=numero_ordre,
                 photo=photo,
                 licence_exploitation=licence_exploitation,
-                attestation_professionnelle=attestation_professionnelle,
-                user = user
+                attestation_professionnelle=attestation_professionnelle
             )
-            print(pharmacie.photo)
             pharmacie.save()
-           
 
-            return redirect('connexion')
+            return redirect('Message')
 
-        context = {
-            'error': error,
-            'message': message
-        }
-
-        return render(request, 'register.html', context)
+        else:
+            message = "Veuillez remplir tous les champs requis."
+            context = {
+                'error': True,
+                'message': message
+            }
+            return render(request, 'register.html', context)
 
     return render(request, 'register.html', {})
-    
+
+
+
+
+def  Message(request):
+    return render (request,'message.html')
+
+
+
+@login_required
+@permission_required('pharmacie.view_pharmacie', raise_exception=True)
+def demande(request):
+    pharmacies = inscription.objects.all()  # Récupère toutes les pharmacies inscrites
+    return render(request, 'demande.html', {'pharmacies': pharmacies})
 
 
 
@@ -323,7 +397,7 @@ def inscription(request):
 
 def sortie(request):
     logout(request)
-    return redirect('connexion')
+    return redirect('Accueil')
 
 
 def password_oublier(request):
@@ -342,8 +416,8 @@ def password_oublier(request):
             msg = EmailMessage(
                 "Modification de mot de pass!",
                 html,
-                "soroib0879@gmail.com",
-                ["soro4827@gmail.com"],
+                "bignuel@gmail.com",
+                ["bignuel@gmail.com"],
             )
 
             msg.content_subtype = 'html'
